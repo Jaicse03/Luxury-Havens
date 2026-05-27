@@ -1,0 +1,2059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Havens | Premium Travel Booking</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            gold: '#d4af37',
+                            slate: '#0f172a'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        outfit: ['Outfit', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons (CDN) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Custom CSS Styles -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Outfit', sans-serif;
+        }
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .luxury-card-glow:hover {
+            box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.15);
+            transform: translateY(-4px);
+        }
+        .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="text-slate-900 flex flex-col min-h-screen antialiased">
+
+    <!-- Global Glassmorphic Header -->
+    <header class="glass-nav sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="#" onclick="showPage('landing')" class="flex items-center space-x-3 text-white">
+                <div class="h-10 w-10 rounded-xl bg-gradient-to-tr from-brand-500 to-indigo-400 flex items-center justify-center shadow-lg shadow-indigo-500/20">
+                    <i data-lucide="hotel" class="h-5 w-5 text-white"></i>
+                </div>
+                <span class="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-100 to-indigo-200 bg-clip-text text-transparent">LUXURY HAVENS</span>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+                <a href="#" onclick="showPage('hotels')" class="hover:text-white transition">Destinations</a>
+                <a href="#" onclick="showPage('dashboard')" class="hover:text-white transition">My Bookings</a>
+                <a href="#" onclick="showPage('spark')" class="hover:text-white transition flex items-center gap-1"><i data-lucide="cpu" class="h-4 w-4 text-brand-500 animate-pulse"></i> Spark Analytics</a>
+                <span id="admin-nav-link" class="hidden">
+                    <a href="#" onclick="showPage('admin')" class="text-brand-500 hover:text-brand-600 font-semibold transition flex items-center gap-1">
+                        <i data-lucide="shield-check" class="h-4 w-4"></i> Admin Panel
+                    </a>
+                </span>
+            </nav>
+
+            <!-- User Auth Actions -->
+            <div class="flex items-center space-x-4">
+                <div id="auth-guest-controls" class="flex items-center space-x-3">
+                    <button onclick="showAuthModal('login')" class="text-sm font-semibold text-white hover:text-slate-200 transition px-4 py-2">Sign In</button>
+                    <button onclick="showAuthModal('register')" class="text-sm font-semibold bg-white text-slate-900 hover:bg-slate-100 transition px-5 py-2.5 rounded-full shadow-md shadow-white/5">Sign Up</button>
+                </div>
+                <div id="auth-user-controls" class="hidden flex items-center space-x-4">
+                    <span id="nav-user-name" class="text-sm font-medium text-slate-200 border-r border-slate-700 pr-4 hidden md:inline"></span>
+                    <button onclick="logout()" class="text-slate-400 hover:text-rose-400 transition" title="Log Out">
+                        <i data-lucide="log-out" class="h-5 w-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <!-- PAGE 1: Landing Page -->
+        <section id="page-landing" class="page-view">
+            <!-- Hero Block -->
+            <div class="relative bg-slate-900 overflow-hidden py-32 px-6">
+                <!-- Decorative absolute background pattern -->
+                <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-30 mix-blend-multiply"></div>
+                <div class="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/60 to-slate-900"></div>
+
+                <div class="relative max-w-5xl mx-auto text-center">
+                    <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 mb-8 backdrop-blur-md">
+                        <i data-lucide="award" class="h-3 w-3 mr-1.5 text-brand-500"></i> The Peak of Exquisite Hospitality
+                    </span>
+                    <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-none mb-6">
+                        Exquisite Havens <br><span class="bg-gradient-to-r from-brand-500 via-indigo-300 to-indigo-100 bg-clip-text text-transparent">For the True Connoisseur</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-12 font-light">
+                        Discover award-winning hotels, villas, and sky residences curated worldwide. Secure reservations seamlessly with real-time status.
+                    </p>
+
+                    <!-- Advanced Floating Search Panel -->
+                    <div class="bg-white/80 backdrop-blur-xl p-4 rounded-3xl shadow-2xl max-w-4xl mx-auto border border-white/40 text-left">
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+                            <!-- Where to -->
+                            <div class="relative px-3 py-2 border-r border-slate-200 last:border-0">
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Destination</label>
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="map-pin" class="h-4 w-4 text-indigo-600"></i>
+                                    <input type="text" id="search-destination" placeholder="Where are you going?" class="w-full bg-transparent text-sm font-semibold focus:outline-none placeholder-slate-400 text-slate-800">
+                                </div>
+                            </div>
+                            <!-- Check In -->
+                            <div class="relative px-3 py-2 border-r border-slate-200 last:border-0">
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Check In</label>
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="calendar" class="h-4 w-4 text-indigo-600"></i>
+                                    <input type="date" id="search-checkin" class="w-full bg-transparent text-sm font-semibold focus:outline-none text-slate-800">
+                                </div>
+                            </div>
+                            <!-- Check Out -->
+                            <div class="relative px-3 py-2 border-r border-slate-200 last:border-0">
+                                <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Check Out</label>
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="calendar" class="h-4 w-4 text-indigo-600"></i>
+                                    <input type="date" id="search-checkout" class="w-full bg-transparent text-sm font-semibold focus:outline-none text-slate-800">
+                                </div>
+                            </div>
+                            <!-- Action -->
+                            <div class="px-2">
+                                <button onclick="triggerSearch()" class="w-full py-4 rounded-2xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-700 hover:to-indigo-700 text-white font-bold shadow-lg shadow-indigo-600/30 transition flex items-center justify-center gap-2">
+                                    <i data-lucide="search" class="h-4 w-4"></i> Search Havens
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Highlights -->
+            <div class="max-w-7xl mx-auto px-6 py-24">
+                <div class="text-center max-w-xl mx-auto mb-16">
+                    <h2 class="text-4xl font-extrabold text-slate-900 mb-4">Curating Memories, Not Just Stays</h2>
+                    <p class="text-slate-500">Every corner designed with precision. Every reservation guaranteed with luxury-grade support.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition">
+                        <div class="h-12 w-12 rounded-2xl bg-indigo-50 flex items-center justify-center mb-6">
+                            <i data-lucide="shield-check" class="h-6 w-6 text-indigo-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Verified Collection</h3>
+                        <p class="text-slate-500 text-sm">Every single hotel in our system passes rigorous standard audits for comfort, security, and amenities.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition">
+                        <div class="h-12 w-12 rounded-2xl bg-amber-50 flex items-center justify-center mb-6">
+                            <i data-lucide="sparkles" class="h-6 w-6 text-amber-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Premium Member Concierge</h3>
+                        <p class="text-slate-500 text-sm">Access exclusive benefits, room upgrades, and local luxury recommendations instantly from your dashboard.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm hover:shadow-md transition">
+                        <div class="h-12 w-12 rounded-2xl bg-emerald-50 flex items-center justify-center mb-6">
+                            <i data-lucide="credit-card" class="h-6 w-6 text-emerald-600"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Flexible Mock Checkout</h3>
+                        <p class="text-slate-500 text-sm">Review full invoices, calculate rates dynamically, and pay via Stripe/Razorpay simulations in seconds.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Handpicked Collections -->
+            <div class="bg-slate-100 py-24">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                        <div>
+                            <h2 class="text-4xl font-extrabold text-slate-900 mb-2">The Signature Collection</h2>
+                            <p class="text-slate-500">Breathtaking locations highly reviewed by our premium members.</p>
+                        </div>
+                        <button onclick="showPage('hotels')" class="mt-4 md:mt-0 text-sm font-semibold text-brand-600 hover:text-brand-700 flex items-center gap-1 transition">
+                            Explore All Properties <i data-lucide="arrow-right" class="h-4 w-4"></i>
+                        </button>
+                    </div>
+
+                    <!-- Highlighted grid populated from script -->
+                    <div id="landing-featured-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <!-- Loading skeleton placeholder -->
+                        <div class="animate-pulse bg-white rounded-3xl h-96"></div>
+                        <div class="animate-pulse bg-white rounded-3xl h-96"></div>
+                        <div class="animate-pulse bg-white rounded-3xl h-96"></div>
+                        <div class="animate-pulse bg-white rounded-3xl h-96"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 2: Hotel Listings Page -->
+        <section id="page-hotels" class="page-view hidden py-12 px-6">
+            <div class="max-w-7xl mx-auto">
+                <h1 class="text-4xl font-extrabold text-slate-900 mb-2">Explore Destinations</h1>
+                <p class="text-slate-500 mb-10">Discover your next escape from our handpicked luxury portfolio.</p>
+
+                <div class="flex flex-col lg:flex-row gap-8">
+                    <!-- Sidebar Filters -->
+                    <aside class="w-full lg:w-1/4 bg-white p-6 rounded-3xl border border-slate-100 shadow-sm h-fit">
+                        <div class="flex items-center justify-between pb-6 border-b border-slate-100 mb-6">
+                            <h3 class="font-bold text-lg text-slate-800">Filter Search</h3>
+                            <button onclick="resetFilters()" class="text-xs font-semibold text-slate-400 hover:text-indigo-600 transition">Reset All</button>
+                        </div>
+
+                        <!-- Location Filter -->
+                        <div class="mb-6">
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">City Location</label>
+                            <select id="filter-city" onchange="applyFilters()" class="w-full border border-slate-200 rounded-xl p-3 text-sm font-medium focus:border-indigo-500 focus:outline-none text-slate-700">
+                                <option value="">All Locations</option>
+                                <option value="Maui">Maui, USA</option>
+                                <option value="Tokyo">Tokyo, Japan</option>
+                                <option value="Lake Como">Lake Como, Italy</option>
+                                <option value="Dubai">Dubai, UAE</option>
+                            </select>
+                        </div>
+
+                        <!-- Price Filter -->
+                        <div class="mb-6">
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Max Price per night</label>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="text-xs text-slate-400 font-medium">$100</span>
+                                <input type="range" id="filter-price-slider" min="100" max="4000" step="100" value="4000" oninput="updatePriceValue(this.value)" onchange="applyFilters()" class="w-full accent-indigo-600 cursor-pointer">
+                                <span class="text-xs text-slate-400 font-medium">$4000</span>
+                            </div>
+                            <div class="text-right font-bold text-indigo-600 text-sm" id="filter-price-indicator">Any Price</div>
+                        </div>
+
+                        <!-- Star Rating Filter -->
+                        <div class="mb-6">
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Minimum Star Rating</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center gap-2 text-sm text-slate-600 cursor-pointer">
+                                    <input type="radio" name="filter-stars" value="" checked onchange="applyFilters()" class="accent-indigo-600">
+                                    <span>Any Rating</span>
+                                </label>
+                                <label class="flex items-center gap-2 text-sm text-slate-600 cursor-pointer">
+                                    <input type="radio" name="filter-stars" value="4.8" onchange="applyFilters()" class="accent-indigo-600">
+                                    <span class="flex items-center gap-1">4.8+ Stars <i data-lucide="star" class="h-3.5 w-3.5 fill-amber-400 text-amber-400"></i></span>
+                                </label>
+                                <label class="flex items-center gap-2 text-sm text-slate-600 cursor-pointer">
+                                    <input type="radio" name="filter-stars" value="4.9" onchange="applyFilters()" class="accent-indigo-600">
+                                    <span class="flex items-center gap-1">4.9+ Stars <i data-lucide="star" class="h-3.5 w-3.5 fill-amber-400 text-amber-400"></i></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Amenities -->
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Preferred Amenities</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center gap-2 text-sm text-slate-600 cursor-pointer">
+                                    <input type="checkbox" name="filter-amenity" value="Pool" onchange="applyFilters()" class="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500">
+                                    <span>Swimming Pool</span>
+                                </label>
+                                <label class="flex items-center gap-2 text-sm text-slate-600 cursor-pointer">
+                                    <input type="checkbox" name="filter-amenity" value="Spa" onchange="applyFilters()" class="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500">
+                                    <span>Wellness Spa</span>
+                                </label>
+                                <label class="flex items-center gap-2 text-sm text-slate-600 cursor-pointer">
+                                    <input type="checkbox" name="filter-amenity" value="Wi-Fi" onchange="applyFilters()" class="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500">
+                                    <span>Complimentary Wi-Fi</span>
+                                </label>
+                                <label class="flex items-center gap-2 text-sm text-slate-600 cursor-pointer">
+                                    <input type="checkbox" name="filter-amenity" value="Gym" onchange="applyFilters()" class="rounded border-slate-300 text-indigo-600 focus:ring-indigo-500">
+                                    <span>Fitness Center</span>
+                                </label>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- Content Listings -->
+                    <div class="w-full lg:w-3/4">
+                        <!-- Sorting Panel -->
+                        <div class="flex items-center justify-between mb-8 bg-white p-4 rounded-2xl border border-slate-100">
+                            <span class="text-sm font-medium text-slate-500" id="hotels-count-label">Loading properties...</span>
+                            <div class="flex items-center gap-2">
+                                <label class="text-xs font-bold text-slate-400 uppercase">Sort By</label>
+                                <select id="filter-sort" onchange="applyFilters()" class="border border-slate-200 rounded-xl p-2 text-sm font-semibold focus:border-indigo-500 focus:outline-none text-slate-700 bg-transparent">
+                                    <option value="">Recommended</option>
+                                    <option value="price_asc">Price: Low to High</option>
+                                    <option value="price_desc">Price: High to Low</option>
+                                    <option value="rating_desc">Top Rated</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Hotel List Grid -->
+                        <div id="hotels-list-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <!-- Dynamically loaded -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 3: Hotel Details Page -->
+        <section id="page-details" class="page-view hidden py-12 px-6">
+            <div class="max-w-7xl mx-auto">
+                <!-- Navigation back link -->
+                <button onclick="showPage('hotels')" class="flex items-center gap-2 text-sm font-semibold text-slate-500 hover:text-indigo-600 transition mb-6">
+                    <i data-lucide="arrow-left" class="h-4 w-4"></i> Back to listings
+                </button>
+
+                <!-- Hotel Main Panel -->
+                <div id="details-content-panel">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 4: Booking checkout page -->
+        <section id="page-checkout" class="page-view hidden py-12 px-6">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-4xl font-extrabold text-slate-900 mb-2">Finalize Reservation</h1>
+                <p class="text-slate-500 mb-10">Review stay calculations and complete payment simulation.</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Forms Panel -->
+                    <div class="md:col-span-2 bg-white p-8 rounded-3xl border border-slate-100 shadow-sm space-y-6">
+                        <h3 class="text-xl font-bold text-slate-800 pb-4 border-b border-slate-100">Guest Credentials</h3>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Full Guest Name</label>
+                            <input type="text" id="checkout-guest-name" class="w-full border border-slate-200 rounded-xl p-3 focus:border-indigo-500 focus:outline-none text-slate-800 text-sm font-medium">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Email Address</label>
+                            <input type="email" id="checkout-guest-email" class="w-full border border-slate-200 rounded-xl p-3 focus:border-indigo-500 focus:outline-none text-slate-800 text-sm font-medium">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Guest count</label>
+                            <select id="checkout-guest-count" class="w-full border border-slate-200 rounded-xl p-3 focus:border-indigo-500 focus:outline-none text-slate-800 text-sm font-medium">
+                                <option value="1">1 Guest</option>
+                                <option value="2" selected>2 Guests</option>
+                                <option value="3">3 Guests</option>
+                                <option value="4">4 Guests</option>
+                            </select>
+                        </div>
+
+                        <h3 class="text-xl font-bold text-slate-800 pt-4 pb-4 border-b border-slate-100">Select Payment Gateway</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <label class="relative border-2 border-slate-200 rounded-2xl p-4 flex flex-col items-center justify-center cursor-pointer hover:border-brand-500 transition select-none [&:has(input:checked)]:border-brand-500 [&:has(input:checked)]:bg-indigo-50/50">
+                                <input type="radio" name="checkout-gateway" value="stripe" checked class="absolute right-3 top-3 accent-indigo-600">
+                                <i data-lucide="credit-card" class="h-6 w-6 text-brand-600 mb-2"></i>
+                                <span class="font-bold text-sm text-slate-700">Stripe Card</span>
+                            </label>
+                            <label class="relative border-2 border-slate-200 rounded-2xl p-4 flex flex-col items-center justify-center cursor-pointer hover:border-brand-500 transition select-none [&:has(input:checked)]:border-brand-500 [&:has(input:checked)]:bg-indigo-50/50">
+                                <input type="radio" name="checkout-gateway" value="razorpay" class="absolute right-3 top-3 accent-indigo-600">
+                                <i data-lucide="wallet" class="h-6 w-6 text-indigo-600 mb-2"></i>
+                                <span class="font-bold text-sm text-slate-700">Razorpay UPI</span>
+                            </label>
+                        </div>
+
+                        <!-- Checkout card inputs -->
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100 space-y-4">
+                            <div class="flex items-center justify-between text-xs font-bold text-slate-400 uppercase">
+                                <span>Mock Payment Details</span>
+                                <span class="text-brand-600 flex items-center gap-1"><i data-lucide="lock" class="h-3 w-3"></i> Encrypted</span>
+                            </div>
+                            <input type="text" placeholder="Card Number (4111 2222 3333 4444)" value="4111 2222 3333 4444" class="w-full bg-white border border-slate-200 rounded-xl p-3 focus:outline-none focus:border-indigo-500 text-sm font-semibold text-slate-700">
+                            <div class="grid grid-cols-2 gap-4">
+                                <input type="text" placeholder="MM/YY" value="12/28" class="bg-white border border-slate-200 rounded-xl p-3 focus:outline-none focus:border-indigo-500 text-sm font-semibold text-slate-700">
+                                <input type="text" placeholder="CVC" value="999" class="bg-white border border-slate-200 rounded-xl p-3 focus:outline-none focus:border-indigo-500 text-sm font-semibold text-slate-700">
+                            </div>
+                        </div>
+
+                        <button onclick="executeCheckoutPayment()" class="w-full py-4 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-700 hover:to-indigo-700 text-white font-bold rounded-2xl shadow-lg shadow-indigo-600/20 transition flex items-center justify-center gap-2">
+                            <i data-lucide="check-circle" class="h-5 w-5"></i> Complete Mock Payment
+                        </button>
+                    </div>
+
+                    <!-- Stay Calculations Sidebar -->
+                    <div id="checkout-summary-sidebar" class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm h-fit">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 5: User Dashboard -->
+        <section id="page-dashboard" class="page-view hidden py-12 px-6">
+            <div class="max-w-7xl mx-auto">
+                <h1 class="text-4xl font-extrabold text-slate-900 mb-2">Welcome Back</h1>
+                <p class="text-slate-500 mb-10">Manage your profile, view upcoming reservations, and edit favorites.</p>
+
+                <!-- Dashboard Tabs Navigation -->
+                <div class="flex border-b border-slate-200 mb-10 space-x-8">
+                    <button onclick="showDashboardTab('bookings')" class="dashboard-tab-btn border-b-2 border-brand-500 text-brand-600 pb-4 font-bold text-sm transition">Reservations History</button>
+                    <button onclick="showDashboardTab('favorites')" class="dashboard-tab-btn border-b-2 border-transparent text-slate-400 hover:text-slate-600 pb-4 font-semibold text-sm transition">Saved Havens</button>
+                    <button onclick="showDashboardTab('settings')" class="dashboard-tab-btn border-b-2 border-transparent text-slate-400 hover:text-slate-600 pb-4 font-semibold text-sm transition">Profile & Verification</button>
+                </div>
+
+                <!-- Tab 1: Bookings -->
+                <div id="dash-tab-bookings" class="dashboard-tab-panel space-y-6">
+                    <!-- Populated dynamically -->
+                </div>
+
+                <!-- Tab 2: Favorites -->
+                <div id="dash-tab-favorites" class="dashboard-tab-panel hidden grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Populated dynamically -->
+                </div>
+
+                <!-- Tab 3: Settings -->
+                <div id="dash-tab-settings" class="dashboard-tab-panel hidden max-w-xl bg-white p-8 rounded-3xl border border-slate-100 shadow-sm space-y-6">
+                    <h3 class="text-xl font-bold text-slate-800 pb-2 border-b border-slate-100">Update Profile</h3>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Display Name</label>
+                        <input type="text" id="dash-profile-name" class="w-full border border-slate-200 rounded-xl p-3 focus:outline-none focus:border-brand-500 text-slate-800 font-medium text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Phone Number</label>
+                        <input type="text" id="dash-profile-phone" class="w-full border border-slate-200 rounded-xl p-3 focus:outline-none focus:border-brand-500 text-slate-800 font-medium text-sm">
+                    </div>
+                    <button onclick="updateProfileSettings()" class="px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm rounded-xl transition shadow-md shadow-brand-500/10">Save Settings</button>
+
+                    <h3 class="text-xl font-bold text-slate-800 pt-6 pb-2 border-b border-slate-100 flex items-center gap-2">
+                        <i data-lucide="shield-check" class="h-5 w-5 text-indigo-600"></i> Account Safety
+                    </h3>
+                    <div class="p-4 bg-indigo-50 border border-indigo-100 rounded-2xl flex items-start gap-3">
+                        <div class="h-8 w-8 rounded-xl bg-indigo-100 flex items-center justify-center shrink-0">
+                            <i data-lucide="mail" class="h-4 w-4 text-indigo-600"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-sm text-slate-800">Email Activation</h4>
+                            <p class="text-xs text-slate-500 mb-3">Activate verified badge on your reservations for elite checking queues.</p>
+                            <span id="verification-status-badge" class="px-3 py-1 bg-indigo-100 text-indigo-700 text-xs font-bold rounded-full">Verifying...</span>
+                            <button id="verify-email-btn" onclick="triggerEmailVerify()" class="hidden text-xs font-bold text-brand-600 hover:underline">Activate Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 6: Admin Dashboard -->
+        <section id="page-admin" class="page-view hidden py-12 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-10">
+                    <div>
+                        <h1 class="text-4xl font-extrabold text-slate-900 mb-2">Admin Command Center</h1>
+                        <p class="text-slate-500">Track total business values, manage hotel properties, and oversee reservation codes.</p>
+                    </div>
+                    <button onclick="showAdminHotelModal()" class="mt-4 md:mt-0 px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm rounded-xl transition flex items-center gap-2 shadow-lg shadow-indigo-600/15">
+                        <i data-lucide="plus-circle" class="h-4 w-4"></i> Add Luxury Hotel
+                    </button>
+                </div>
+
+                <!-- Dynamic Analytics Overview -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12" id="admin-analytics-grid">
+                    <!-- Populated dynamically -->
+                </div>
+
+                <!-- Hotel list and Bookings listings -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Hotel Management list -->
+                    <div class="lg:col-span-2 bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                        <h3 class="text-xl font-bold text-slate-800 pb-4 border-b border-slate-100 mb-6 flex items-center gap-2">
+                            <i data-lucide="hotel" class="h-5 w-5 text-brand-600"></i> Managed Portfolio
+                        </h3>
+                        <div class="overflow-x-auto custom-scroll">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="border-b border-slate-100 text-slate-400 text-xs font-bold uppercase tracking-wider">
+                                        <th class="pb-3">Hotel Destination</th>
+                                        <th class="pb-3">Location</th>
+                                        <th class="pb-3 text-right">Revenue</th>
+                                        <th class="pb-3 text-right">Bookings</th>
+                                        <th class="pb-3 text-center">Rating</th>
+                                        <th class="pb-3 text-right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-hotels-table-body" class="text-sm font-semibold text-slate-600">
+                                    <!-- Populated dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Bookings Feed -->
+                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                        <h3 class="text-xl font-bold text-slate-800 pb-4 border-b border-slate-100 mb-6 flex items-center gap-2">
+                            <i data-lucide="book-open" class="h-5 w-5 text-indigo-600"></i> Active Reservations Feed
+                        </h3>
+                        <div class="space-y-4 max-h-[500px] overflow-y-auto custom-scroll pr-2" id="admin-bookings-feed">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 7: Spark Engine Analytics -->
+        <section id="page-spark" class="page-view hidden py-12 px-6">
+            <div class="max-w-7xl mx-auto space-y-12">
+                <!-- Header Title block -->
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-[10px] font-extrabold bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 mb-2">
+                            <i data-lucide="cpu" class="h-3 w-3 mr-1 text-indigo-500 animate-pulse"></i> Powered by Apache Spark Core
+                        </span>
+                        <h1 class="text-4xl font-black text-slate-950 tracking-tight flex items-center gap-2">
+                            Spark Processing Diagnostics
+                        </h1>
+                        <p class="text-slate-500 text-sm">Review large-scale offline batch calculations compiled by PySpark executors.</p>
+                    </div>
+                    <button onclick="triggerSparkAnalyticsJob()" class="px-6 py-3 bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-700 hover:to-indigo-700 text-white font-bold text-sm rounded-xl transition flex items-center gap-2 shadow-lg shadow-indigo-600/20">
+                        <i data-lucide="play" class="h-4 w-4"></i> Run PySpark Aggregations
+                    </button>
+                </div>
+
+                <!-- Spark Diagnostics Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="bg-slate-900 text-white p-6 rounded-3xl border border-slate-800 shadow-lg relative overflow-hidden">
+                        <div class="absolute -right-8 -top-8 w-24 h-24 bg-indigo-500/10 rounded-full blur-2xl"></div>
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Master Node</span>
+                        <span class="text-xl font-black block">local[*]</span>
+                        <span class="text-[10px] text-indigo-400 font-semibold flex items-center gap-1 mt-2">
+                            <span class="h-2 w-2 rounded-full bg-indigo-400 animate-ping"></span> Multi-thread CPU cluster
+                        </span>
+                    </div>
+                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Active Status</span>
+                        <span class="text-xl font-black text-slate-800 flex items-center gap-1">
+                            <i data-lucide="activity" class="h-5 w-5 text-emerald-500"></i> Active Session
+                        </span>
+                        <span class="text-[10px] text-slate-400 font-semibold block mt-2">SparkSession auto-init</span>
+                    </div>
+                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Data Source Connection</span>
+                        <span class="text-xl font-black text-slate-800 flex items-center gap-1">
+                            <i data-lucide="database" class="h-5 w-5 text-brand-600"></i> SQLite DB Engine
+                        </span>
+                        <span class="text-[10px] text-slate-400 font-semibold block mt-2">SQLite to DataFrame Mapper</span>
+                    </div>
+                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Last Job Execution</span>
+                        <span class="text-xl font-black text-slate-800" id="spark-last-run">Not Executed Yet</span>
+                        <span class="text-[10px] text-slate-400 font-semibold block mt-2">Aggregates cache output</span>
+                    </div>
+                </div>
+
+                <!-- Executing loader panel -->
+                <div id="spark-loader-panel" class="hidden bg-slate-900 text-slate-300 p-8 rounded-3xl border border-slate-800 shadow-2xl flex flex-col items-center justify-center space-y-4 py-16 animate-pulse">
+                    <div class="relative h-16 w-16 flex items-center justify-center">
+                        <span class="absolute inset-0 rounded-full border-4 border-slate-800 border-t-indigo-500 animate-spin"></span>
+                        <i data-lucide="cpu" class="h-6 w-6 text-indigo-400 animate-pulse"></i>
+                    </div>
+                    <div class="text-center">
+                        <h4 class="font-extrabold text-white text-lg">PySpark Data Aggregation In Progress</h4>
+                        <p class="text-xs text-slate-400 mt-1" id="spark-loader-step">Initializing SparkContext and starting map-reduce workers...</p>
+                    </div>
+                </div>
+
+                <!-- Spark aggregated data visual dashboard -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8" id="spark-analytics-dashboard">
+                    <!-- City revenue summary -->
+                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                        <h3 class="text-xl font-bold text-slate-800 pb-4 border-b border-slate-100 mb-6 flex items-center gap-2">
+                            <i data-lucide="map" class="h-5 w-5 text-indigo-600"></i> Confirmed Revenue by City (Spark SQL)
+                        </h3>
+                        <div class="space-y-5" id="spark-city-list">
+                            <!-- Populated dynamically -->
+                            <div class="text-sm font-semibold text-slate-400 py-6 text-center">Run Spark job to view aggregates.</div>
+                        </div>
+                    </div>
+
+                    <!-- Room Statistics summary -->
+                    <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                        <h3 class="text-xl font-bold text-slate-800 pb-4 border-b border-slate-100 mb-6 flex items-center gap-2">
+                            <i data-lucide="line-chart" class="h-5 w-5 text-brand-600"></i> Stay Duration Stats by Room Category
+                        </h3>
+                        <div class="space-y-4" id="spark-room-list">
+                            <!-- Populated dynamically -->
+                            <div class="text-sm font-semibold text-slate-400 py-6 text-center">Run Spark job to view aggregates.</div>
+                        </div>
+                    </div>
+
+                    <!-- Top Performers leaderboard -->
+                    <div class="lg:col-span-2 bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
+                        <h3 class="text-xl font-bold text-slate-800 pb-4 border-b border-slate-100 mb-6 flex items-center gap-2">
+                            <i data-lucide="award" class="h-5 w-5 text-amber-500"></i> Top-Performing Hotel Assets by Revenue (Spark Join)
+                        </h3>
+                        <div class="overflow-x-auto custom-scroll">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="border-b border-slate-100 text-slate-400 text-xs font-bold uppercase tracking-wider">
+                                        <th class="pb-3">Hotel Destination</th>
+                                        <th class="pb-3">City Location</th>
+                                        <th class="pb-3 text-right">Confirmed Revenue</th>
+                                        <th class="pb-3 text-center">Avg Rating Score</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="spark-hotels-table" class="text-sm font-semibold text-slate-600">
+                                    <!-- Populated dynamically -->
+                                    <tr>
+                                        <td colspan="4" class="py-6 text-center text-slate-400 font-semibold">Run Spark job to populate leaderboard.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 py-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-slate-500 text-sm">
+            <div class="flex items-center space-x-2 text-white mb-4 md:mb-0">
+                <span class="font-extrabold tracking-tight">LUXURY HAVENS</span>
+                <span class="text-xs font-bold text-brand-500 px-2 py-0.5 rounded bg-brand-500/10">PRO</span>
+            </div>
+            <p class="font-medium">&copy; 2026 Luxury Havens. Scalable Python FastAPI + React Suite.</p>
+        </div>
+    </footer>
+
+    <!-- MODAL 1: Authentication (Login / Register) -->
+    <div id="modal-auth" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-md hidden px-6">
+        <div class="bg-white p-8 rounded-3xl border border-slate-100 max-w-md w-full shadow-2xl space-y-6 relative">
+            <button onclick="closeModal('modal-auth')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition">
+                <i data-lucide="x" class="h-5 w-5"></i>
+            </button>
+            <div class="text-center">
+                <h3 class="text-2xl font-extrabold text-slate-900" id="auth-title">Welcome Back</h3>
+                <p class="text-slate-400 text-sm mt-1" id="auth-subtitle">Sign in to unlock exclusive travel pricing</p>
+            </div>
+            
+            <div class="space-y-4">
+                <!-- Registration Specific Name Fields -->
+                <div id="auth-field-name" class="hidden">
+                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Display Name</label>
+                    <input type="text" id="auth-input-name" placeholder="John Doe" class="w-full border border-slate-200 rounded-xl p-3 focus:outline-none focus:border-brand-500 text-sm font-semibold text-slate-700">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Email Address</label>
+                    <input type="email" id="auth-input-email" placeholder="john@example.com" class="w-full border border-slate-200 rounded-xl p-3 focus:outline-none focus:border-brand-500 text-sm font-semibold text-slate-700">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Password</label>
+                    <input type="password" id="auth-input-password" placeholder="••••••••" class="w-full border border-slate-200 rounded-xl p-3 focus:outline-none focus:border-brand-500 text-sm font-semibold text-slate-700">
+                </div>
+            </div>
+
+            <button onclick="handleAuthSubmit()" class="w-full py-3.5 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl transition shadow-lg shadow-indigo-600/10 flex items-center justify-center gap-2">
+                <span id="auth-btn-text">Proceed</span> <i data-lucide="arrow-right" class="h-4 w-4"></i>
+            </button>
+
+            <div class="text-center text-xs font-bold text-slate-400 uppercase">
+                <span id="auth-toggle-prompt">Don't have an account?</span>
+                <button onclick="toggleAuthMode()" class="text-brand-600 hover:underline inline ml-1 font-extrabold" id="auth-toggle-link">Sign Up</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: Add Hotel (Admin) -->
+    <div id="modal-admin-hotel" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-md hidden px-6">
+        <div class="bg-white p-8 rounded-3xl border border-slate-100 max-w-lg w-full shadow-2xl space-y-6 relative max-h-[90vh] overflow-y-auto custom-scroll">
+            <button onclick="closeModal('modal-admin-hotel')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 transition">
+                <i data-lucide="x" class="h-5 w-5"></i>
+            </button>
+            <h3 class="text-2xl font-extrabold text-slate-900">Configure Hotel Destination</h3>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Hotel Name</label>
+                    <input type="text" id="admin-hotel-name" placeholder="Grand Resort & Spa" class="w-full border border-slate-200 rounded-xl p-3 focus:outline-none focus:border-brand-500 text-sm font-semibold">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Description</label>
+                    <textarea id="admin-hotel-desc" placeholder="Provide description..." rows="3" class="w-full border border-slate-200 rounded-xl p-3 focus:outline-none focus:border-brand-500 text-sm font-semibold"></textarea>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">City</label>
+                        <input type="text" id="admin-hotel-city" placeholder="Maui" class="w-full border border-slate-200 rounded-xl p-3 focus:outline-none focus:border-brand-500 text-sm font-semibold">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Country</label>
+                        <input type="text" id="admin-hotel-country" placeholder="United States" class="w-full border border-slate-200 rounded-xl p-3 focus:outline-none focus:border-brand-500 text-sm font-semibold">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Street Address</label>
+                    <input type="text" id="admin-hotel-address" placeholder="123 Ocean Blvd" class="w-full border border-slate-200 rounded-xl p-3 focus:outline-none focus:border-brand-500 text-sm font-semibold">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Image URL</label>
+                    <input type="text" id="admin-hotel-image" value="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80" class="w-full border border-slate-200 rounded-xl p-3 focus:outline-none focus:border-brand-500 text-sm font-semibold text-slate-600">
+                </div>
+            </div>
+
+            <button onclick="submitAdminHotel()" class="w-full py-4 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-xl transition shadow-lg shadow-indigo-600/15">
+                Save & Seed Property
+            </button>
+        </div>
+    </div>
+
+    <!-- CLIENT LOGIC ENGINE (Vanilla JS interacting with FastAPI) -->
+    <script>
+        const API_URL = 'http://localhost:8000/api/v1';
+        let currentUserId = null;
+        let currentUserRole = 'user';
+        let currentUserVerified = false;
+        let hotelsCache = [];
+        let bookingDetailsCache = null;
+        let selectedRoom = null;
+        let selectedDates = { checkIn: '', checkOut: '', nights: 0 };
+        let activeAuthMode = 'login'; // 'login' or 'register'
+
+        // 1. Initial State Loading
+        window.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            initSession();
+            loadLandingProperties();
+            
+            // Set date inputs to logical defaults (today + tomorrow)
+            const today = new Date();
+            const tomorrow = new Date();
+            tomorrow.setDate(today.getDate() + 2);
+            
+            const formatDate = (d) => d.toISOString().split('T')[0];
+            document.getElementById('search-checkin').value = formatDate(today);
+            document.getElementById('search-checkout').value = formatDate(tomorrow);
+        });
+
+        // Toggle SPA Page Panels
+        function showPage(pageId) {
+            document.querySelectorAll('.page-view').forEach(p => p.classList.add('hidden'));
+            document.getElementById(`page-${pageId}`).classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (pageId === 'hotels') {
+                loadHotelsList();
+            } else if (pageId === 'dashboard') {
+                requireAuth(() => loadUserDashboard());
+            } else if (pageId === 'admin') {
+                requireAuth(() => loadAdminDashboard(), 'admin');
+            }
+        }
+
+        // Require Authentication Guard
+        function requireAuth(callback, role = 'user') {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                showAuthModal('login');
+                return;
+            }
+            if (role === 'admin' && currentUserRole !== 'admin') {
+                alert('Access restricted to Admins only.');
+                showPage('landing');
+                return;
+            }
+            callback();
+        }
+
+        // Initialize User Session from LocalStorage
+        async function initSession() {
+            const token = localStorage.getItem('token');
+            if (token) {
+                try {
+                    const res = await fetch(`${API_URL}/users/me`, {
+                        headers: { 'Authorization': `Bearer ${token}` }
+                    });
+                    if (res.ok) {
+                        const user = await res.json();
+                        currentUserId = user.id;
+                        currentUserRole = user.role;
+                        currentUserVerified = user.is_verified;
+                        
+                        document.getElementById('auth-guest-controls').classList.add('hidden');
+                        const userControls = document.getElementById('auth-user-controls');
+                        userControls.classList.remove('hidden');
+                        document.getElementById('nav-user-name').innerText = user.full_name;
+                        document.getElementById('nav-user-name').classList.remove('hidden');
+
+                        if (user.role === 'admin') {
+                            document.getElementById('admin-nav-link').classList.remove('hidden');
+                        }
+                    } else {
+                        logout();
+                    }
+                } catch (e) {
+                    console.error('Session restoration failed:', e);
+                }
+            }
+            lucide.createIcons();
+        }
+
+        // Auth Modals Handling
+        function showAuthModal(mode) {
+            activeAuthMode = mode;
+            document.getElementById('modal-auth').classList.remove('hidden');
+            
+            const title = document.getElementById('auth-title');
+            const subtitle = document.getElementById('auth-subtitle');
+            const nameField = document.getElementById('auth-field-name');
+            const btnText = document.getElementById('auth-btn-text');
+            const prompt = document.getElementById('auth-toggle-prompt');
+            const toggleLink = document.getElementById('auth-toggle-link');
+
+            if (mode === 'login') {
+                title.innerText = 'Welcome Back';
+                subtitle.innerText = 'Sign in to unlock exclusive luxury travel pricing';
+                nameField.classList.add('hidden');
+                btnText.innerText = 'Sign In';
+                prompt.innerText = "Don't have an account?";
+                toggleLink.innerText = 'Sign Up';
+            } else {
+                title.innerText = 'Create Account';
+                subtitle.innerText = 'Become a premium member to secure special privileges';
+                nameField.classList.remove('hidden');
+                btnText.innerText = 'Sign Up';
+                prompt.innerText = 'Already have an account?';
+                toggleLink.innerText = 'Sign In';
+            }
+            lucide.createIcons();
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        function toggleAuthMode() {
+            showAuthModal(activeAuthMode === 'login' ? 'register' : 'login');
+        }
+
+        async function handleAuthSubmit() {
+            const email = document.getElementById('auth-input-email').value;
+            const password = document.getElementById('auth-input-password').value;
+            const full_name = document.getElementById('auth-input-name').value;
+
+            if (!email || !password) {
+                alert('Please fill out all fields.');
+                return;
+            }
+
+            try {
+                let res, data;
+                if (activeAuthMode === 'login') {
+                    res = await fetch(`${API_URL}/auth/login`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password })
+                    });
+                } else {
+                    res = await fetch(`${API_URL}/auth/register`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password, full_name, role: 'user' })
+                    });
+                }
+
+                if (res.ok) {
+                    data = await res.json();
+                    localStorage.setItem('token', data.access_token);
+                    closeModal('modal-auth');
+                    await initSession();
+                    alert('Logged in successfully!');
+                    showPage('landing');
+                } else {
+                    const err = await res.json();
+                    alert(`Error: ${err.detail || 'Authentication failed'}`);
+                }
+            } catch (e) {
+                alert('Connection to backend failed. Please run "py backend/app/main.py" first!');
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            currentUserId = null;
+            currentUserRole = 'user';
+            currentUserVerified = false;
+            document.getElementById('auth-guest-controls').classList.remove('hidden');
+            document.getElementById('auth-user-controls').classList.add('hidden');
+            document.getElementById('nav-user-name').classList.add('hidden');
+            document.getElementById('admin-nav-link').classList.add('hidden');
+            alert('Logged out successfully.');
+            showPage('landing');
+        }
+
+        // 2. Hotel Fetching and Search Functions
+        async function loadLandingProperties() {
+            try {
+                const res = await fetch(`${API_URL}/hotels?limit=4`);
+                if (res.ok) {
+                    const hotels = await res.json();
+                    const grid = document.getElementById('landing-featured-grid');
+                    grid.innerHTML = '';
+                    
+                    hotels.forEach(h => {
+                        const img = h.images.find(i => i.is_primary)?.url || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=400&q=80';
+                        const startPrice = h.rooms.length > 0 ? Math.min(...h.rooms.map(r => r.price_per_night)) : 299;
+                        grid.innerHTML += `
+                            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-100 transition duration-300 flex flex-col group" onclick="loadHotelDetails(${h.id})">
+                                <div class="relative overflow-hidden h-64 shrink-0">
+                                    <img src="${img}" alt="${h.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                                    <span class="absolute top-4 left-4 px-3 py-1 bg-slate-900/80 backdrop-blur-md rounded-full text-xs font-bold text-white flex items-center gap-1 shadow-sm">
+                                        <i data-lucide="star" class="h-3 w-3 fill-amber-400 text-amber-400"></i> ${h.rating.toFixed(1)}
+                                    </span>
+                                </div>
+                                <div class="p-6 flex-grow flex flex-col justify-between">
+                                    <div>
+                                        <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1.5">${h.city}, ${h.country}</div>
+                                        <h4 class="font-extrabold text-lg text-slate-900 mb-2 leading-snug">${h.name}</h4>
+                                    </div>
+                                    <div class="flex items-center justify-between border-t border-slate-100 pt-4 mt-4">
+                                        <div class="text-slate-400 text-xs font-semibold">From <span class="text-lg font-black text-slate-950">$${startPrice}</span>/night</div>
+                                        <span class="h-8 w-8 rounded-full bg-slate-900 text-white flex items-center justify-center group-hover:bg-brand-600 transition"><i data-lucide="arrow-up-right" class="h-4 w-4"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    lucide.createIcons();
+                }
+            } catch (e) {
+                const grid = document.getElementById('landing-featured-grid');
+                grid.innerHTML = `
+                    <div class="col-span-full bg-amber-50 border border-amber-200 text-amber-800 p-6 rounded-3xl text-center space-y-4">
+                        <i data-lucide="alert-triangle" class="h-10 w-10 mx-auto text-amber-600"></i>
+                        <h4 class="font-bold text-lg">Server Not Connected</h4>
+                        <p class="text-sm font-medium">To activate dynamic full-stack bookings, start the Python backend service first!</p>
+                        <button onclick="loadLandingProperties()" class="px-5 py-2.5 bg-amber-600 text-white text-xs font-bold rounded-xl hover:bg-amber-700 transition">Try Reconnecting</button>
+                    </div>
+                `;
+                lucide.createIcons();
+            }
+        }
+
+        // Trigger search from landing panel
+        function triggerSearch() {
+            const dest = document.getElementById('search-destination').value;
+            const inDate = document.getElementById('search-checkin').value;
+            const outDate = document.getElementById('search-checkout').value;
+
+            if (inDate && outDate) {
+                const nights = (new Date(outDate) - new Date(inDate)) / (1000 * 60 * 60 * 24);
+                if (nights <= 0) {
+                    alert('Check-out date must exceed check-in.');
+                    return;
+                }
+                selectedDates = { checkIn: inDate, checkOut: outDate, nights };
+            }
+
+            // Direct to Listings with parameters
+            showPage('hotels');
+            if (dest) {
+                document.getElementById('filter-city').value = dest;
+                applyFilters();
+            }
+        }
+
+        // Price Filter Indicator
+        function updatePriceValue(val) {
+            document.getElementById('filter-price-indicator').innerText = `$${val} maximum`;
+        }
+
+        // Fetch properties with filters
+        async function loadHotelsList() {
+            const city = document.getElementById('filter-city').value;
+            const price = document.getElementById('filter-price-slider').value;
+            const sort = document.getElementById('filter-sort').value;
+            const starInput = document.querySelector('input[name="filter-stars"]:checked');
+            const rating = starInput ? starInput.value : '';
+            
+            // Selected amenities
+            const amenities = [];
+            document.querySelectorAll('input[name="filter-amenity"]:checked').forEach(c => {
+                amenities.push(c.value);
+            });
+
+            // Construct URL queries
+            let query = `?max_price=${price}`;
+            if (city) query += `&city=${city}`;
+            if (rating) query += `&min_rating=${rating}`;
+            if (sort) query += `&sort_by=${sort}`;
+            amenities.forEach(a => {
+                query += `&amenities=${encodeURIComponent(a)}`;
+            });
+
+            try {
+                const res = await fetch(`${API_URL}/hotels${query}`);
+                if (res.ok) {
+                    const hotels = await res.json();
+                    hotelsCache = hotels;
+                    
+                    document.getElementById('hotels-count-label').innerText = `Found ${hotels.length} luxury destinations`;
+                    const grid = document.getElementById('hotels-list-grid');
+                    grid.innerHTML = '';
+
+                    if (hotels.length === 0) {
+                        grid.innerHTML = `
+                            <div class="col-span-full py-16 text-center text-slate-400">
+                                <i data-lucide="compass" class="h-12 w-12 mx-auto mb-4 text-slate-300"></i>
+                                <p class="text-lg font-bold">No Properties Match</p>
+                                <p class="text-sm font-medium">Try broadening your search metrics or resetting filters.</p>
+                            </div>
+                        `;
+                        lucide.createIcons();
+                        return;
+                    }
+
+                    hotels.forEach(h => {
+                        const img = h.images.find(i => i.is_primary)?.url || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=400&q=80';
+                        const startPrice = h.rooms.length > 0 ? Math.min(...h.rooms.map(r => r.price_per_night)) : 299;
+                        
+                        // Extract icon listing
+                        let amList = '';
+                        h.amenities.slice(0, 4).forEach(a => {
+                            amList += `<span class="px-2.5 py-1 bg-slate-50 text-[10px] font-bold text-slate-500 rounded-md border border-slate-100">${a}</span>`;
+                        });
+
+                        grid.innerHTML += `
+                            <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-slate-100 transition duration-300 flex flex-col group cursor-pointer" onclick="loadHotelDetails(${h.id})">
+                                <div class="relative h-64 overflow-hidden shrink-0">
+                                    <img src="${img}" alt="${h.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                                    <span class="absolute top-4 left-4 px-3 py-1 bg-slate-900/80 backdrop-blur-md rounded-full text-xs font-bold text-white flex items-center gap-1 shadow-sm">
+                                        <i data-lucide="star" class="h-3 w-3 fill-amber-400 text-amber-400"></i> ${h.rating.toFixed(1)}
+                                    </span>
+                                </div>
+                                <div class="p-6 flex-grow flex flex-col justify-between">
+                                    <div>
+                                        <div class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">${h.city}, ${h.country}</div>
+                                        <h4 class="font-extrabold text-xl text-slate-900 mb-2 leading-snug group-hover:text-brand-600 transition">${h.name}</h4>
+                                        <p class="text-slate-500 text-xs font-medium line-clamp-2 mb-4">${h.description}</p>
+                                        <div class="flex flex-wrap gap-1.5 mb-4">${amList}</div>
+                                    </div>
+                                    <div class="flex items-center justify-between border-t border-slate-100 pt-4 mt-2">
+                                        <div>
+                                            <span class="text-slate-400 text-[10px] font-bold uppercase tracking-wider block">Rates from</span>
+                                            <span class="text-2xl font-black text-slate-950">$${startPrice}</span><span class="text-slate-400 text-xs font-medium">/night</span>
+                                        </div>
+                                        <button class="px-5 py-2.5 rounded-xl bg-slate-950 text-white text-xs font-bold group-hover:bg-brand-600 transition flex items-center gap-1">
+                                            Select Haven <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    lucide.createIcons();
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        function applyFilters() {
+            loadHotelsList();
+        }
+
+        function resetFilters() {
+            document.getElementById('filter-city').value = '';
+            document.getElementById('filter-price-slider').value = 4000;
+            updatePriceValue(4000);
+            document.querySelector('input[name="filter-stars"][value=""]').checked = true;
+            document.querySelectorAll('input[name="filter-amenity"]:checked').forEach(c => c.checked = false);
+            document.getElementById('filter-sort').value = '';
+            applyFilters();
+        }
+
+        // 3. Hotel Details Loading
+        async function loadHotelDetails(hotelId) {
+            try {
+                const res = await fetch(`${API_URL}/hotels/${hotelId}`);
+                if (res.ok) {
+                    const hotel = await res.json();
+                    showPage('details');
+                    
+                    const panel = document.getElementById('details-content-panel');
+                    const primaryImg = hotel.images.find(i => i.is_primary)?.url || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80';
+                    const secondaryImgs = hotel.images.filter(i => !i.is_primary);
+
+                    // Grid images markup
+                    let imagesMarkup = `<div class="md:col-span-2 h-[450px] rounded-3xl overflow-hidden border border-slate-100 shadow-sm relative"><img src="${primaryImg}" class="w-full h-full object-cover"></div>`;
+                    if (secondaryImgs.length > 0) {
+                        imagesMarkup += `
+                            <div class="grid grid-rows-2 gap-4 h-[450px]">
+                                <div class="rounded-3xl overflow-hidden shadow-sm border border-slate-100"><img src="${secondaryImgs[0].url}" class="w-full h-full object-cover"></div>
+                                <div class="rounded-3xl overflow-hidden shadow-sm border border-slate-100 relative">
+                                    <img src="${secondaryImgs[1]?.url || 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=400&q=80'}" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 bg-black/40 flex items-center justify-center text-white font-extrabold text-lg">+${hotel.images.length} Photos</div>
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                    // Room items markup
+                    let roomsMarkup = '';
+                    hotel.rooms.forEach(r => {
+                        let rmAm = '';
+                        r.amenities.forEach(a => {
+                            rmAm += `<span class="px-2 py-0.5 bg-slate-50 text-[10px] font-bold text-slate-500 rounded border border-slate-100">${a}</span>`;
+                        });
+
+                        roomsMarkup += `
+                            <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                                <div>
+                                    <h4 class="font-extrabold text-lg text-slate-900">${r.room_type}</h4>
+                                    <p class="text-xs text-slate-500 font-medium mb-3">${r.description}</p>
+                                    <div class="flex flex-wrap gap-1">${rmAm}</div>
+                                </div>
+                                <div class="text-right shrink-0 flex sm:flex-col items-baseline sm:items-end gap-2 justify-between w-full sm:w-auto">
+                                    <div>
+                                        <span class="text-2xl font-black text-slate-900">$${r.price_per_night}</span>
+                                        <span class="text-slate-400 text-xs font-semibold">/night</span>
+                                    </div>
+                                    <button onclick="initiateRoomBooking(${hotel.id}, ${r.id}, ${r.price_per_night}, '${r.room_type}')" class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-extrabold text-xs shadow-md shadow-brand-500/10 transition">
+                                        Book Room
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    // Amenities list
+                    let amList = '';
+                    hotel.amenities.forEach(a => {
+                        amList += `
+                            <div class="flex items-center gap-2 text-sm font-semibold text-slate-600">
+                                <i data-lucide="check-circle-2" class="h-4 w-4 text-brand-600"></i>
+                                <span>${a}</span>
+                            </div>
+                        `;
+                    });
+
+                    // Reviews markup
+                    let reviewsMarkup = '<div class="text-sm font-medium text-slate-400">No verified guest reviews written yet.</div>';
+                    try {
+                        const rRes = await fetch(`${API_URL}/reviews/hotel/${hotel.id}`);
+                        if (rRes.ok) {
+                            const reviews = await rRes.json();
+                            if (reviews.length > 0) {
+                                reviewsMarkup = '';
+                                reviews.forEach(rv => {
+                                    const ratingStars = Array(rv.rating).fill('<i data-lucide="star" class="h-3.5 w-3.5 fill-amber-400 text-amber-400"></i>').join('');
+                                    reviewsMarkup += `
+                                        <div class="p-5 rounded-2xl bg-slate-50 border border-slate-100 flex flex-col justify-between">
+                                            <div class="flex items-center justify-between mb-3">
+                                                <span class="font-bold text-sm text-slate-800">${rv.user?.full_name || 'Verified Member'}</span>
+                                                <div class="flex">${ratingStars}</div>
+                                            </div>
+                                            <p class="text-slate-600 text-sm font-medium leading-relaxed italic">"${rv.comment}"</p>
+                                        </div>
+                                    `;
+                                });
+                            }
+                        }
+                    } catch (e) {
+                        console.error('Failed to load reviews:', e);
+                    }
+
+                    // Assemble Panel
+                    panel.innerHTML = `
+                        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8">
+                            <div>
+                                <div class="flex items-center gap-3 mb-2">
+                                    <span class="px-3 py-1 bg-brand-500/10 text-brand-600 font-extrabold text-[10px] uppercase tracking-wider rounded-full flex items-center gap-1 border border-brand-500/10">
+                                        <i data-lucide="star" class="h-3 w-3 fill-brand-600 text-brand-600"></i> ${hotel.rating.toFixed(1)} Rating
+                                    </span>
+                                    <span class="text-xs text-slate-400 font-semibold flex items-center gap-1"><i data-lucide="map-pin" class="h-3.5 w-3.5"></i> ${hotel.city}, ${hotel.country}</span>
+                                </div>
+                                <h1 class="text-4xl md:text-5xl font-black text-slate-950 tracking-tight">${hotel.name}</h1>
+                            </div>
+                            <button onclick="toggleFavoriteHotel(${hotel.id}, this)" class="mt-4 md:mt-0 p-3.5 rounded-full border border-slate-200 hover:border-rose-400 transition bg-white text-slate-400 hover:text-rose-500 shadow-sm flex items-center gap-2 font-bold text-xs">
+                                <i data-lucide="heart" class="h-5 w-5"></i> Save Properties
+                            </button>
+                        </div>
+
+                        <!-- Image grid layout -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">${imagesMarkup}</div>
+
+                        <!-- Layout divide -->
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                            <!-- Left: Description, amenities, reviews, room booking -->
+                            <div class="lg:col-span-2 space-y-12">
+                                <div>
+                                    <h3 class="text-2xl font-black text-slate-900 mb-4">About the Haven</h3>
+                                    <p class="text-slate-600 leading-relaxed font-medium text-sm md:text-base">${hotel.description}</p>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-2xl font-black text-slate-900 mb-6">Offered Comforts & Services</h3>
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">${amList}</div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-2xl font-black text-slate-900 mb-6">Reserve Your Suite</h3>
+                                    <div class="space-y-4">${roomsMarkup}</div>
+                                </div>
+
+                                <div>
+                                    <h3 class="text-2xl font-black text-slate-900 mb-6">Guest Reviews</h3>
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">${reviewsMarkup}</div>
+                                </div>
+                            </div>
+
+                            <!-- Right Side calendar check -->
+                            <div>
+                                <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm sticky top-28 space-y-6">
+                                    <h4 class="font-extrabold text-xl text-slate-950 flex items-center gap-2">
+                                        <i data-lucide="check-square" class="h-5 w-5 text-brand-600"></i> Availability Check
+                                    </h4>
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Check In</label>
+                                        <input type="date" id="widget-in" onchange="recalculateWidgetStay(${hotel.id})" class="w-full border border-slate-200 rounded-xl p-3 focus:outline-none focus:border-brand-500 font-semibold text-slate-700 text-sm">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Check Out</label>
+                                        <input type="date" id="widget-out" onchange="recalculateWidgetStay(${hotel.id})" class="w-full border border-slate-200 rounded-xl p-3 focus:outline-none focus:border-brand-500 font-semibold text-slate-700 text-sm">
+                                    </div>
+                                    <div class="bg-slate-50 p-4 rounded-2xl flex items-center justify-between text-xs font-bold text-slate-500 uppercase border border-slate-100">
+                                        <span>Stay Duration</span>
+                                        <span class="text-indigo-600 text-sm font-extrabold" id="widget-nights-lbl">0 nights</span>
+                                    </div>
+                                    <button onclick="checkWidgetAvailability(${hotel.id})" class="w-full py-4 bg-slate-950 hover:bg-brand-600 text-white font-bold rounded-2xl transition shadow-lg shadow-slate-950/10 flex items-center justify-center gap-2">
+                                        <i data-lucide="refresh-cw" class="h-4 w-4"></i> Check Free Rooms
+                                    </button>
+                                    
+                                    <div id="widget-availability-results" class="space-y-3 pt-4 border-t border-slate-100 hidden">
+                                        <!-- Availability result list -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Set default dates inside calendar widget
+                    document.getElementById('widget-in').value = selectedDates.checkIn || document.getElementById('search-checkin').value;
+                    document.getElementById('widget-out').value = selectedDates.checkOut || document.getElementById('search-checkout').value;
+                    recalculateWidgetStay(hotel.id);
+                    
+                    lucide.createIcons();
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        // recalculate days between dates
+        function recalculateWidgetStay(hotelId) {
+            const inDate = document.getElementById('widget-in').value;
+            const outDate = document.getElementById('widget-out').value;
+            const lbl = document.getElementById('widget-nights-lbl');
+
+            if (inDate && outDate) {
+                const days = (new Date(outDate) - new Date(inDate)) / (1000 * 60 * 60 * 24);
+                if (days > 0) {
+                    lbl.innerText = `${days} nights`;
+                    selectedDates = { checkIn: inDate, checkOut: outDate, nights: days };
+                    return;
+                }
+            }
+            lbl.innerText = '0 nights';
+        }
+
+        // Toggle Favorite Status
+        async function toggleFavoriteHotel(hotelId, btn) {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                showAuthModal('login');
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_URL}/users/me/favorites/${hotelId}`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    alert(data.message);
+                    
+                    // Toggle button visuals
+                    if (data.favorited) {
+                        btn.classList.add('text-rose-500', 'border-rose-300', 'bg-rose-50');
+                    } else {
+                        btn.classList.remove('text-rose-500', 'border-rose-300', 'bg-rose-50');
+                    }
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        // Check availability on details widget
+        async function checkWidgetAvailability(hotelId) {
+            const inDate = document.getElementById('widget-in').value;
+            const outDate = document.getElementById('widget-out').value;
+
+            if (!inDate || !outDate || selectedDates.nights <= 0) {
+                alert('Choose logical check-in/out range.');
+                return;
+            }
+
+            try {
+                const res = await fetch(`${API_URL}/hotels/${hotelId}/availability?check_in=${inDate}&check_out=${outDate}`);
+                if (res.ok) {
+                    const data = await res.json();
+                    const panel = document.getElementById('widget-availability-results');
+                    panel.innerHTML = '';
+                    panel.classList.remove('hidden');
+
+                    data.rooms.forEach(r => {
+                        const textStatus = r.quantity_available > 0 ? `${r.quantity_available} left` : 'Sold Out';
+                        const badgeColor = r.quantity_available > 0 ? 'bg-emerald-50 text-emerald-700 border-emerald-100' : 'bg-rose-50 text-rose-700 border-rose-100';
+                        
+                        let btnHtml = `<button disabled class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-400 text-xs font-bold shrink-0">Sold Out</button>`;
+                        if (r.quantity_available > 0) {
+                            btnHtml = `<button onclick="initiateRoomBooking(${hotelId}, ${r.room_id}, ${r.price_per_night}, '${r.room_type}')" class="px-3 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold shrink-0 transition">Reserve</button>`;
+                        }
+
+                        panel.innerHTML += `
+                            <div class="p-3 bg-slate-50 border border-slate-100 rounded-xl flex items-center justify-between gap-2">
+                                <div>
+                                    <h5 class="text-xs font-bold text-slate-800">${r.room_type}</h5>
+                                    <span class="px-2 py-0.5 rounded border text-[9px] font-bold ${badgeColor} inline-block mt-1">${textStatus}</span>
+                                </div>
+                                ${btnHtml}
+                            </div>
+                        `;
+                    });
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        // 4. Booking Checkout Flow
+        function initiateRoomBooking(hotelId, roomId, pricePerNight, roomType) {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                showAuthModal('login');
+                return;
+            }
+
+            // Fallback for missing check dates
+            if (!selectedDates.checkIn || !selectedDates.checkOut || selectedDates.nights <= 0) {
+                const inDate = document.getElementById('widget-in')?.value || document.getElementById('search-checkin').value;
+                const outDate = document.getElementById('widget-out')?.value || document.getElementById('search-checkout').value;
+                const nights = (new Date(outDate) - new Date(inDate)) / (1000 * 60 * 60 * 24);
+                selectedDates = { checkIn: inDate, checkOut: outDate, nights };
+            }
+
+            const hotel = hotelsCache.find(h => h.id === hotelId) || { name: 'Luxury Destination', city: 'Maui', country: 'United States' };
+
+            selectedRoom = { roomId, pricePerNight, roomType, hotelName: hotel.name, hotelLocation: `${hotel.city}, ${hotel.country}` };
+            
+            showPage('checkout');
+
+            // Prefill guest fields
+            const tokenPayload = JSON.parse(atob(token.split('.')[1]));
+            document.getElementById('checkout-guest-email').value = localStorage.getItem('guest_email') || 'guest@luxuryhavens.com';
+            document.getElementById('checkout-guest-name').value = document.getElementById('nav-user-name').innerText || 'Alex Mercer';
+
+            // Load calculation summary card
+            const subtotal = selectedRoom.pricePerNight * selectedDates.nights;
+            const taxes = subtotal * 0.12; // 12% luxury VAT
+            const total = subtotal + taxes;
+
+            const sidebar = document.getElementById('checkout-summary-sidebar');
+            sidebar.innerHTML = `
+                <h4 class="font-extrabold text-lg text-slate-900 pb-4 border-b border-slate-100 mb-4">Reservation Summary</h4>
+                <div class="space-y-4">
+                    <div>
+                        <div class="text-[10px] font-bold text-slate-400 uppercase">Selected property</div>
+                        <h5 class="font-extrabold text-sm text-slate-800 leading-snug">${selectedRoom.hotelName}</h5>
+                        <p class="text-xs text-slate-400 font-semibold">${selectedRoom.hotelLocation}</p>
+                    </div>
+                    <div>
+                        <div class="text-[10px] font-bold text-slate-400 uppercase">Room Category</div>
+                        <h5 class="font-extrabold text-sm text-slate-700">${selectedRoom.roomType}</h5>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-xs font-bold border-t border-b border-slate-100 py-3 my-2 text-slate-500 uppercase">
+                        <div>Check In: <span class="block text-slate-800 text-sm mt-0.5">${selectedDates.checkIn}</span></div>
+                        <div>Check Out: <span class="block text-slate-800 text-sm mt-0.5">${selectedDates.checkOut}</span></div>
+                    </div>
+                    <div class="space-y-2 text-sm font-semibold text-slate-500">
+                        <div class="flex justify-between"><span>Rate calculation</span><span>$${selectedRoom.pricePerNight} x ${selectedDates.nights} nights</span></div>
+                        <div class="flex justify-between"><span>Luxury VAT Tax (12%)</span><span>$${taxes.toFixed(0)}</span></div>
+                        <div class="flex justify-between border-t border-slate-100 pt-3 text-slate-900 font-extrabold text-base"><span>Total Price</span><span>$${total.toFixed(0)}</span></div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Execute actual post booking and pay simulation
+        async function executeCheckoutPayment() {
+            const token = localStorage.getItem('token');
+            if (!token) return;
+
+            const guestName = document.getElementById('checkout-guest-name').value;
+            const guestEmail = document.getElementById('checkout-guest-email').value;
+            const guestCount = document.getElementById('checkout-guest-count').value;
+
+            if (!guestName || !guestEmail) {
+                alert('Fill out guest fields.');
+                return;
+            }
+
+            try {
+                // Step 1: Create pending booking in DB
+                const bookRes = await fetch(`${API_URL}/bookings/`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        room_id: selectedRoom.roomId,
+                        check_in: selectedDates.checkIn,
+                        check_out: selectedDates.checkOut,
+                        guest_name: guestName,
+                        guest_email: guestEmail,
+                        guest_count: parseInt(guestCount)
+                    })
+                });
+
+                if (bookRes.ok) {
+                    const booking = await bookRes.json();
+                    
+                    // Step 2: Pay pending booking via mock payment
+                    const method = document.querySelector('input[name="checkout-gateway"]:checked').value;
+                    
+                    const payRes = await fetch(`${API_URL}/bookings/${booking.id}/pay`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            booking_id: booking.id,
+                            payment_method: method,
+                            transaction_id: `MOCK-${method.toUpperCase()}-${Math.random().toString(36).substring(2, 8).toUpperCase()}`
+                        })
+                    });
+
+                    if (payRes.ok) {
+                        alert(`Payment Confirmed! Your Reservation Code is ${booking.booking_code}.`);
+                        showPage('dashboard');
+                    } else {
+                        alert('Booking created, but transaction failed. You can retry pay from dashboard.');
+                        showPage('dashboard');
+                    }
+                } else {
+                    const err = await bookRes.json();
+                    alert(`Reservation Failure: ${err.detail || 'Overlapping dates'}`);
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        // 5. Dashboard Tab switching & Operations
+        function showDashboardTab(tabName) {
+            document.querySelectorAll('.dashboard-tab-panel').forEach(p => p.classList.add('hidden'));
+            document.getElementById(`dash-tab-${tabName}`).classList.remove('hidden');
+
+            document.querySelectorAll('.dashboard-tab-btn').forEach(b => {
+                b.classList.remove('border-brand-500', 'text-brand-600');
+                b.classList.add('border-transparent', 'text-slate-400');
+            });
+            event.target.classList.add('border-brand-500', 'text-brand-600');
+        }
+
+        // Load reservations, settings, favorites in user portal
+        async function loadUserDashboard() {
+            const token = localStorage.getItem('token');
+            if (!token) return;
+
+            // Load bookings
+            try {
+                const res = await fetch(`${API_URL}/bookings/my-bookings`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (res.ok) {
+                    const bookings = await res.json();
+                    const panel = document.getElementById('dash-tab-bookings');
+                    panel.innerHTML = '';
+
+                    if (bookings.length === 0) {
+                        panel.innerHTML = `
+                            <div class="py-12 bg-white rounded-3xl border border-slate-100 text-center text-slate-400">
+                                <i data-lucide="calendar" class="h-10 w-10 mx-auto mb-3 text-slate-300"></i>
+                                <p class="font-bold text-lg">No Stays Planned</p>
+                                <p class="text-sm font-medium mb-4">Book your first luxury retreat today.</p>
+                                <button onclick="showPage('hotels')" class="px-5 py-2.5 bg-brand-600 text-white font-bold text-xs rounded-xl shadow-md">Find Destinations</button>
+                            </div>
+                        `;
+                        lucide.createIcons();
+                    } else {
+                        bookings.forEach(b => {
+                            const isPast = new Date(b.check_out) < new Date();
+                            const statusColor = b.status === 'confirmed' ? 'bg-emerald-50 text-emerald-700 border-emerald-100' : b.status === 'cancelled' ? 'bg-rose-50 text-rose-700 border-rose-100' : 'bg-amber-50 text-amber-700 border-amber-100';
+                            
+                            // Cancellation button
+                            let cancelBtn = '';
+                            if (b.status === 'confirmed' && !isPast) {
+                                cancelBtn = `<button onclick="cancelReservation(${b.id})" class="px-4 py-2 border border-rose-200 hover:bg-rose-50 rounded-xl text-xs font-bold text-rose-600 transition">Cancel Booking</button>`;
+                            }
+
+                            // Review panel for completed stays
+                            let reviewHtml = '';
+                            if (isPast && b.status === 'confirmed') {
+                                reviewHtml = `
+                                    <div class="border-t border-slate-100 pt-4 mt-4 flex flex-col md:flex-row md:items-center justify-between gap-3">
+                                        <div class="text-xs text-slate-500 font-medium">Have you completed your stay? Leave a review for this property.</div>
+                                        <button onclick="triggerWriteReview(${b.room?.hotel?.id}, '${b.room?.hotel?.name}')" class="px-4 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs rounded-xl transition flex items-center gap-1">
+                                            <i data-lucide="edit-3" class="h-3.5 w-3.5"></i> Submit Review
+                                        </button>
+                                    </div>
+                                `;
+                            }
+
+                            panel.innerHTML += `
+                                <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm relative hover:shadow-md transition">
+                                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-100 pb-4 mb-4">
+                                        <div>
+                                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-0.5">Booking Code</span>
+                                            <span class="font-extrabold text-sm text-slate-800">${b.booking_code}</span>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <span class="px-3 py-1 text-xs font-bold rounded-full border ${statusColor} capitalize">${b.status}</span>
+                                            <button onclick="downloadJSONInvoice(${b.id})" class="p-2 border border-slate-200 rounded-xl hover:bg-slate-50 transition text-slate-500" title="View JSON Invoice"><i data-lucide="receipt" class="h-4 w-4"></i></button>
+                                        </div>
+                                    </div>
+
+                                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 items-center">
+                                        <div class="md:col-span-2">
+                                            <h4 class="font-black text-lg text-slate-900 leading-snug">${b.room?.hotel?.name || 'Luxury Destination'}</h4>
+                                            <p class="text-xs text-slate-400 font-bold mb-1">${b.room?.hotel?.city || 'Kapalua'}, ${b.room?.hotel?.country || 'USA'}</p>
+                                            <p class="text-xs font-semibold text-slate-500">Suite category: <span class="text-slate-800 font-bold">${b.room?.room_type || 'Classic Room'}</span></p>
+                                        </div>
+                                        <div class="grid grid-cols-2 gap-4 text-xs font-bold text-slate-500 uppercase">
+                                            <div>Check In: <span class="block text-slate-800 font-black text-sm mt-0.5">${b.check_in}</span></div>
+                                            <div>Check Out: <span class="block text-slate-800 font-black text-sm mt-0.5">${b.check_out}</span></div>
+                                        </div>
+                                        <div class="text-right flex md:flex-col justify-between items-center md:items-end w-full">
+                                            <div>
+                                                <span class="text-[10px] font-bold text-slate-400 uppercase block">Total Price Paid</span>
+                                                <span class="text-xl font-black text-slate-950">$${b.total_price.toFixed(0)}</span>
+                                            </div>
+                                            ${cancelBtn}
+                                        </div>
+                                    </div>
+                                    ${reviewHtml}
+                                </div>
+                            `;
+                        });
+                        lucide.createIcons();
+                    }
+                }
+            } catch (e) {
+                console.error(e);
+            }
+
+            // Load Favorites
+            try {
+                const fRes = await fetch(`${API_URL}/users/me/favorites`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (fRes.ok) {
+                    const favorites = await fRes.json();
+                    const fPanel = document.getElementById('dash-tab-favorites');
+                    fPanel.innerHTML = '';
+
+                    if (favorites.length === 0) {
+                        fPanel.innerHTML = `<div class="col-span-full py-12 text-center text-slate-400 font-semibold">No saved havens found.</div>`;
+                    } else {
+                        favorites.forEach(h => {
+                            const img = h.images.find(i => i.is_primary)?.url || 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=400&q=80';
+                            fPanel.innerHTML += `
+                                <div class="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-md transition cursor-pointer" onclick="loadHotelDetails(${h.id})">
+                                    <div class="h-48 overflow-hidden relative"><img src="${img}" class="w-full h-full object-cover"></div>
+                                    <div class="p-5">
+                                        <h5 class="font-extrabold text-base text-slate-800">${h.name}</h5>
+                                        <p class="text-xs text-slate-400 mt-1">${h.city}, ${h.country}</p>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                    }
+                }
+            } catch (e) {
+                console.error(e);
+            }
+
+            // Load account safety status
+            const badge = document.getElementById('verification-status-badge');
+            const verifyBtn = document.getElementById('verify-email-btn');
+            
+            if (currentUserVerified) {
+                badge.innerText = 'Verified Activation Code';
+                badge.className = 'px-3 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full';
+                verifyBtn.classList.add('hidden');
+            } else {
+                badge.innerText = 'Unverified Account';
+                badge.className = 'px-3 py-1 bg-amber-100 text-amber-800 text-xs font-bold rounded-full';
+                verifyBtn.classList.remove('hidden');
+            }
+
+            document.getElementById('dash-profile-name').value = document.getElementById('nav-user-name').innerText;
+        }
+
+        // Cancel Reservation
+        async function cancelReservation(bookingId) {
+            if (!confirm('Are you sure you want to cancel this booking?')) return;
+            const token = localStorage.getItem('token');
+
+            try {
+                const res = await fetch(`${API_URL}/bookings/${bookingId}/cancel`, {
+                    method: 'PUT',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (res.ok) {
+                    alert('Reservation successfully cancelled.');
+                    loadUserDashboard();
+                } else {
+                    alert('Cancellation failed.');
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        // Write review trigger
+        async function triggerWriteReview(hotelId, hotelName) {
+            const comment = prompt(`Write your honest verified review for "${hotelName}":`);
+            if (!comment) return;
+
+            const rating = parseInt(prompt('Rate the experience between 1 and 5 stars:', '5'));
+            if (isNaN(rating) || rating < 1 || rating > 5) {
+                alert('Invalid rating stars.');
+                return;
+            }
+
+            const token = localStorage.getItem('token');
+            try {
+                const res = await fetch(`${API_URL}/reviews/`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ hotel_id: hotelId, rating, comment })
+                });
+
+                if (res.ok) {
+                    alert('Review submitted successfully! Recalculating scores.');
+                    loadUserDashboard();
+                } else {
+                    alert('Submit failed.');
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        // Trigger Email activation
+        async function triggerEmailVerify() {
+            const token = localStorage.getItem('token');
+            const email = localStorage.getItem('guest_email') || 'guest@luxuryhavens.com';
+
+            try {
+                const res = await fetch(`${API_URL}/auth/verify-email?email=${encodeURIComponent(email)}`, {
+                    method: 'POST'
+                });
+                if (res.ok) {
+                    alert('Email verified successfully!');
+                    currentUserVerified = true;
+                    loadUserDashboard();
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        // Download JSON Invoice
+        async function downloadJSONInvoice(bookingId) {
+            const token = localStorage.getItem('token');
+            try {
+                const res = await fetch(`${API_URL}/bookings/${bookingId}/invoice`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (res.ok) {
+                    const inv = await res.json();
+                    
+                    // Simple modal prompt listing the invoice or logging it
+                    const block = JSON.stringify(inv, null, 2);
+                    alert(`=== LUXURY HAVENS JSON INVOICE ===\nInvoice Number: ${inv.invoice_number}\nStatus: ${inv.payment.status}\nCheck-In: ${inv.stay.check_in}\nTotal Paid: $${inv.payment.total_price}\n(Full invoice model logged to developer console)`);
+                    console.log('Invoice Object:', inv);
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        // Profile update settings
+        async function updateProfileSettings() {
+            const full_name = document.getElementById('dash-profile-name').value;
+            const phone = document.getElementById('dash-profile-phone').value;
+            const token = localStorage.getItem('token');
+
+            try {
+                const res = await fetch(`${API_URL}/users/me`, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ full_name, phone })
+                });
+
+                if (res.ok) {
+                    alert('Profile settings successfully updated.');
+                    initSession();
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        // 6. Admin Panel Functions
+        async function loadAdminDashboard() {
+            const token = localStorage.getItem('token');
+
+            // Load analytics
+            try {
+                const res = await fetch(`${API_URL}/admin/analytics`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    const grid = document.getElementById('admin-analytics-grid');
+                    
+                    grid.innerHTML = `
+                        <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm flex items-center gap-4">
+                            <div class="h-12 w-12 rounded-2xl bg-indigo-50 flex items-center justify-center shrink-0">
+                                <i data-lucide="dollar-sign" class="h-6 w-6 text-indigo-600"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-slate-400 uppercase block mb-0.5">Total Revenue</span>
+                                <span class="text-2xl font-black text-slate-900">$${data.summary.total_revenue.toFixed(0)}</span>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm flex items-center gap-4">
+                            <div class="h-12 w-12 rounded-2xl bg-amber-50 flex items-center justify-center shrink-0">
+                                <i data-lucide="book-open" class="h-6 w-6 text-amber-600"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-slate-400 uppercase block mb-0.5">Reservations</span>
+                                <span class="text-2xl font-black text-slate-900">${data.summary.total_bookings} total</span>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm flex items-center gap-4">
+                            <div class="h-12 w-12 rounded-2xl bg-emerald-50 flex items-center justify-center shrink-0">
+                                <i data-lucide="check-circle" class="h-6 w-6 text-emerald-600"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-slate-400 uppercase block mb-0.5">Occupied Rates</span>
+                                <span class="text-2xl font-black text-slate-900">${data.summary.confirmed_bookings} Confirmed</span>
+                            </div>
+                        </div>
+                        <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm flex items-center gap-4">
+                            <div class="h-12 w-12 rounded-2xl bg-slate-50 flex items-center justify-center shrink-0">
+                                <i data-lucide="users" class="h-6 w-6 text-slate-600"></i>
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-slate-400 uppercase block mb-0.5">User Clients</span>
+                                <span class="text-2xl font-black text-slate-900">${data.summary.total_customers} members</span>
+                            </div>
+                        </div>
+                    `;
+
+                    // Managed portfolio table body
+                    const table = document.getElementById('admin-hotels-table-body');
+                    table.innerHTML = '';
+                    data.hotels_breakdown.forEach(hb => {
+                        table.innerHTML += `
+                            <tr class="border-b border-slate-100 last:border-0 hover:bg-slate-50/50">
+                                <td class="py-4 font-extrabold text-slate-900">${hb.name}</td>
+                                <td class="py-4 text-xs font-semibold text-slate-400">${hb.city}</td>
+                                <td class="py-4 text-right text-emerald-600 font-bold">$${hb.revenue.toFixed(0)}</td>
+                                <td class="py-4 text-right">${hb.bookings_count}</td>
+                                <td class="py-4 text-center text-amber-500 flex items-center justify-center gap-0.5 h-full pt-5"><i data-lucide="star" class="h-3 w-3 fill-amber-500"></i> ${hb.rating.toFixed(1)}</td>
+                                <td class="py-4 text-right">
+                                    <button onclick="adminDeleteHotel(${hb.hotel_id})" class="text-rose-500 hover:text-rose-700 transition" title="Delete Property"><i data-lucide="trash-2" class="h-4.5 w-4.5"></i></button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                    lucide.createIcons();
+                }
+            } catch (e) {
+                console.error(e);
+            }
+
+            // Load bookings feed
+            try {
+                const res = await fetch(`${API_URL}/admin/bookings`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (res.ok) {
+                    const bookings = await res.json();
+                    const feed = document.getElementById('admin-bookings-feed');
+                    feed.innerHTML = '';
+
+                    bookings.forEach(b => {
+                        const statusBadge = b.status === 'confirmed' ? 'bg-emerald-50 text-emerald-700 border-emerald-100' : b.status === 'cancelled' ? 'bg-rose-50 text-rose-700 border-rose-100' : 'bg-amber-50 text-amber-700 border-amber-100';
+                        feed.innerHTML += `
+                            <div class="p-4 bg-slate-50 border border-slate-100 rounded-2xl relative">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-extrabold text-xs text-slate-800">${b.booking_code}</span>
+                                    <span class="px-2 py-0.5 text-[9px] font-bold rounded border uppercase ${statusBadge}">${b.status}</span>
+                                </div>
+                                <h5 class="font-extrabold text-sm text-slate-900">${b.guest_name}</h5>
+                                <div class="text-[10px] text-slate-400 font-bold uppercase mt-1">Rates: $${b.total_price} | ${b.check_in} to ${b.check_out}</div>
+                            </div>
+                        `;
+                    });
+                    lucide.createIcons();
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        // Add hotel modal
+        function showAdminHotelModal() {
+            document.getElementById('modal-admin-hotel').classList.remove('hidden');
+        }
+
+        async function submitAdminHotel() {
+            const name = document.getElementById('admin-hotel-name').value;
+            const description = document.getElementById('admin-hotel-desc').value;
+            const city = document.getElementById('admin-hotel-city').value;
+            const country = document.getElementById('admin-hotel-country').value;
+            const address = document.getElementById('admin-hotel-address').value;
+            const imageUrl = document.getElementById('admin-hotel-image').value;
+            
+            const token = localStorage.getItem('token');
+
+            if (!name || !description || !city || !country || !address) {
+                alert('Fill out all required fields.');
+                return;
+            }
+
+            try {
+                // Step 1: Create Hotel
+                const res = await fetch(`${API_URL}/admin/hotels`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, description, city, country, address, rating: 5.0, amenities: ["Wi-Fi", "Pool", "Gym", "Spa"] })
+                });
+
+                if (res.ok) {
+                    const hotel = await res.json();
+
+                    // Step 2: Attach primary image URL
+                    await fetch(`${API_URL}/admin/hotels/${hotel.id}/images`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ url: imageUrl, is_primary: true })
+                    });
+
+                    // Step 3: Seed standard rooms
+                    await fetch(`${API_URL}/admin/hotels/${hotel.id}/rooms`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ room_type: 'Luxury Suite', description: 'Splendid premium category room.', price_per_night: 399.0, capacity: 2, amenities: ["AC", "TV", "Kingsize Bed"], is_available: true, quantity: 5 })
+                    });
+
+                    alert('Luxury property and rooms added successfully!');
+                    closeModal('modal-admin-hotel');
+                    loadAdminDashboard();
+                } else {
+                    alert('Creation failed.');
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        async function adminDeleteHotel(hotelId) {
+            if (!confirm('Are you sure you want to permanently delete this hotel?')) return;
+            const token = localStorage.getItem('token');
+
+            try {
+                const res = await fetch(`${API_URL}/admin/hotels/${hotelId}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if (res.ok) {
+                    alert('Hotel deleted successfully.');
+                    loadAdminDashboard();
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        // PySpark Trigger and Dashboard Rendering
+        async function triggerSparkAnalyticsJob() {
+            const token = localStorage.getItem('token');
+            const loader = document.getElementById('spark-loader-panel');
+            const dashboard = document.getElementById('spark-analytics-dashboard');
+            const stepText = document.getElementById('spark-loader-step');
+
+            loader.classList.remove('hidden');
+            dashboard.classList.add('hidden');
+
+            // Micro-step text animations to show off Spark operations
+            const steps = [
+                "Initializing SparkSession on master 'local[*]'...",
+                "Extracting Users, Bookings, and Hotels tables from SQLite...",
+                "Converting relational schemas into Spark DataFrames...",
+                "Running map-reduce operations for revenue-by-city sums...",
+                "Joining Rooms with Bookings to compute average stay duration...",
+                "Writing final aggregates back to driver as analytics_report.json...",
+                "Apache Spark Execution Completed Successfully!"
+            ];
+
+            let stepIdx = 0;
+            const interval = setInterval(() => {
+                if (stepIdx < steps.length) {
+                    stepText.innerText = steps[stepIdx];
+                    stepIdx++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 600);
+
+            try {
+                // Call PySpark route
+                const res = await fetch(`${API_URL}/admin/spark-job`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if (res.ok) {
+                    const data = await res.json();
+                    const report = data.report;
+
+                    // Update last run time
+                    document.getElementById('spark-last-run').innerText = new Date(report.generated_at).toLocaleTimeString();
+
+                    // 1. Render City List
+                    const cityList = document.getElementById('spark-city-list');
+                    cityList.innerHTML = '';
+                    
+                    report.revenue_by_city.forEach(c => {
+                        const widthPct = Math.max(10, Math.min(100, (c.total_revenue / 4000) * 100));
+                        cityList.innerHTML += `
+                            <div>
+                                <div class="flex justify-between text-xs font-bold text-slate-700 mb-1">
+                                    <span>${c.city}</span>
+                                    <span>$${c.total_revenue.toFixed(0)} (${c.confirmed_bookings} stays)</span>
+                                </div>
+                                <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-brand-600 to-indigo-600 rounded-full" style="width: ${widthPct}%"></div>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    // 2. Render Room Type Stats
+                    const roomList = document.getElementById('spark-room-list');
+                    roomList.innerHTML = '';
+                    report.room_stats.forEach(r => {
+                        roomList.innerHTML += `
+                            <div class="p-4 bg-slate-50 border border-slate-100 rounded-2xl flex items-center justify-between">
+                                <div>
+                                    <h4 class="font-bold text-sm text-slate-800">${r.room_type}</h4>
+                                    <p class="text-xs text-slate-400 font-semibold mt-0.5">Average Stay: ${r.avg_stay_nights.toFixed(1)} nights</p>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-sm font-black text-indigo-600">$${r.avg_spend.toFixed(0)}</span>
+                                    <span class="text-[10px] text-slate-400 font-bold block uppercase tracking-wide">avg spend</span>
+                                </div>
+                            </div>
+                        `;
+                    });
+
+                    // 3. Render Top Assets Leaderboard
+                    const hotelTable = document.getElementById('spark-hotels-table');
+                    hotelTable.innerHTML = '';
+                    report.top_hotels.forEach(h => {
+                        hotelTable.innerHTML += `
+                            <tr class="border-b border-slate-100 last:border-0 hover:bg-slate-50/50">
+                                <td class="py-4 font-extrabold text-slate-900">${h.name}</td>
+                                <td class="py-4 text-xs font-semibold text-slate-400">${h.city}</td>
+                                <td class="py-4 text-right text-emerald-600 font-black">$${h.confirmed_revenue.toFixed(0)}</td>
+                                <td class="py-4 text-center text-amber-500 flex items-center justify-center gap-0.5"><i data-lucide="star" class="h-3 w-3 fill-amber-500 text-amber-500"></i> ${h.rating.toFixed(1)}</td>
+                            </tr>
+                        `;
+                    });
+                    
+                    lucide.createIcons();
+                } else {
+                    alert("Spark aggregations execution failed.");
+                }
+            } catch (e) {
+                console.error(e);
+                alert("Connection failed. Ensure local backend is online.");
+            } finally {
+                setTimeout(() => {
+                    loader.classList.add('hidden');
+                    dashboard.classList.remove('hidden');
+                }, 4000); // give enough time for step animation to look gorgeous
+            }
+        }
+    </script>
+</body>
+</html>
