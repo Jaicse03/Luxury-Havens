@@ -184,7 +184,7 @@ The project uses PostgreSQL for structured relational database management.
 
 # Folder Structure
 
-
+```
 HotelBookingPlatform/
 │
 ├── app.py
@@ -209,7 +209,7 @@ HotelBookingPlatform/
 ├── routes/
 ├── utils/
 └── README.md
-
+```
 
 ---
 
